@@ -1,0 +1,55 @@
+﻿@model FriendsViewModel
+
+<h1>Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmsFriends.Keys)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmsFriends.Keys)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.ConfirmsFriends)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Key.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Key.Email)
+            </td>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.Identity.Name == item.Key.Email)
+                {
+                    <td>You</td>
+                }
+                else
+                {
+                    if (item.Value)
+                    {
+                        <td>
+                            <a asp-controller="Chat" asp-action="Index" asp-route-id="@item.Key.Id">Chat</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Friend" asp-action="Delete" asp-route-id="@item.Key.Id">Delete</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Not confirmed</td>
+                    }
+                }
+            }
+
+        </tr>
+    }
+</table>

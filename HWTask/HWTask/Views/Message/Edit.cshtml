@@ -1,0 +1,26 @@
+﻿@model HWTask.Models.MessageEditViewModel
+
+<h2>Редактирование сообщения</h2>
+
+<form asp-action="Edit" asp-controller="Message" 
+      asp-route-Id="@Model.Id" 
+      asp-route-CopyId="@Model.CopyId" 
+      asp-route-MessageId="@Model.MessageId"
+      asp-route-UserKey="@Model.UserKey"
+      asp-route-FriendId="@Model.FriendId">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div>
+        <div class="form-group">
+            <label asp-for="Text">Введите текст сообщения</label>
+            <input type="text" asp-for="Text" />
+            <span asp-validation-for="Text" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Edit" class="btn btn-outline-dark" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
